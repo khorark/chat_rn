@@ -17,10 +17,6 @@ export default EStyleSheet.create({
         width: getRemValue(414),
         height: getRemValue(120),
     },
-    eyeImage: {
-        width: getRemValue(18),
-        height: getRemValue(14),
-    },
     inputContainer: {
         width: getRemValue(315),
         height: getRemValue(44),
@@ -29,7 +25,6 @@ export default EStyleSheet.create({
         borderWidth: 1,
         borderColor: colors.alto,
         flexDirection: 'row',
-        alignItems: 'center',
         alignSelf: 'center',
         paddingHorizontal: getRemValue(10),
         paddingVertical: getRemValue(1),
@@ -38,9 +33,17 @@ export default EStyleSheet.create({
     input: {
         flex: 1,
     },
+    delimeter: {
+        marginVertical: getRemValue(5),
+        backgroundColor: colors.alto,
+        width: getRemValue(1),
+        marginHorizontal: 10,
+    },
     eyeContainer: {
-        borderLeftWidth: 1,
-        borderLeftColor: colors.alto,
-        paddingLeft: 10,
+        alignSelf: 'center',
+    },
+    eyeImage: {
+        width: getRemValue(18),
+        height: getRemValue(14),
     },
 })

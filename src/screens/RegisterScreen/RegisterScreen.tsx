@@ -1,18 +1,12 @@
 import React, { PureComponent } from 'react'
-import {
-    View,
-    TextInput,
-    TouchableOpacity,
-    NativeSyntheticEvent,
-    TextInputSubmitEditingEventData,
-    ScrollView,
-} from 'react-native'
+import { View, TextInput, NativeSyntheticEvent, TextInputSubmitEditingEventData, ScrollView } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Image from 'react-native-remote-svg'
 
 import styles from './RegisterScreenStyles'
 import { colors } from '../../constants/colors'
 import { setValueToStorage } from '../../helpers/storageHelper'
+import TouchableComponent from '../../components/TouchableComponent/TouchableComponent'
 
 interface IRegisterState {
     securityText: boolean
@@ -32,7 +26,11 @@ export default class RegisterScreen extends PureComponent<{}, IRegisterState> {
                     <View style={styles.imageContainer}>
                         <Image source={require('../../assets/images/logo.svg')} style={styles.logoImage} />
                     </View>
-                    <View style={styles.inputContainer}>
+                    <ScrollView
+                        keyboardShouldPersistTaps={'always'}
+                        keyboardDismissMode={'on-drag'}
+                        contentContainerStyle={styles.inputContainer}
+                    >
                         <TextInput
                             style={styles.input}
                             keyboardType={'numeric'}
@@ -45,10 +43,11 @@ export default class RegisterScreen extends PureComponent<{}, IRegisterState> {
                             secureTextEntry={this.state.securityText}
                             underlineColorAndroid={'transparent'}
                         />
-                        <TouchableOpacity style={styles.eyeContainer} onPress={this.handleToggleHideMode}>
+                        <View style={styles.delimeter} />
+                        <TouchableComponent style={styles.eyeContainer} onPress={this.handleToggleHideMode}>
                             <Image source={require('../../assets/images/open_eye.svg')} style={styles.eyeImage} />
-                        </TouchableOpacity>
-                    </View>
+                        </TouchableComponent>
+                    </ScrollView>
                 </LinearGradient>
             </ScrollView>
         )
