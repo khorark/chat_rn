@@ -27,7 +27,7 @@ export default class RegisterScreen extends PureComponent<{}, IRegisterState> {
 
     public render() {
         return (
-            <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContainer}>
+            <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <LinearGradient colors={[colors.turquoiseapprox, colors.iceCold]} style={styles.mainContainer}>
                     <View style={styles.imageContainer}>
                         <Image source={require('../../assets/images/logo.svg')} style={styles.logoImage} />

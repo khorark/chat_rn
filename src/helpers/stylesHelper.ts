@@ -1,7 +1,7 @@
 import { Dimensions } from 'react-native';
 const { width } = Dimensions.get('window');
 
-const rem = width > 340 ? 18 : 16;
+const rem = width > 340 ? 18 : 16
 
 /**
  * Получение rem из px

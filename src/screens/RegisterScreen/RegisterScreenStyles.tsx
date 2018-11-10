@@ -11,10 +11,10 @@ export default EStyleSheet.create({
     },
     imageContainer: {
         marginTop: getRemValue(128),
-        marginLeft: getRemValue(-55),
+        marginLeft: getRemValue(-94),
     },
     logoImage: {
-        width: getRemValue(320),
+        width: getRemValue(414),
         height: getRemValue(120),
     },
     eyeImage: {
@@ -26,13 +26,14 @@ export default EStyleSheet.create({
         height: getRemValue(44),
         borderRadius: getRemValue(22),
         backgroundColor: colors.white,
-        borderWidth: getRemValue(1),
+        borderWidth: 1,
         borderColor: colors.alto,
         flexDirection: 'row',
         alignItems: 'center',
         alignSelf: 'center',
         paddingHorizontal: getRemValue(10),
         paddingVertical: getRemValue(1),
+        marginTop: getRemValue(94),
     },
     input: {
         flex: 1,
