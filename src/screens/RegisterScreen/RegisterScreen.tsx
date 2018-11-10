@@ -3,7 +3,6 @@ import {
     View,
     TextInput,
     TouchableOpacity,
-    AsyncStorage,
     NativeSyntheticEvent,
     TextInputSubmitEditingEventData,
     ScrollView,
@@ -13,6 +12,7 @@ import Image from 'react-native-remote-svg'
 
 import styles from './RegisterScreenStyles'
 import { colors } from '../../constants/colors'
+import { setValueToStorage } from '../../helpers/storageHelper'
 
 interface IRegisterState {
     securityText: boolean
@@ -67,9 +67,8 @@ export default class RegisterScreen extends PureComponent<{}, IRegisterState> {
             return false
         }
         try {
-            await AsyncStorage.setItem('@PIN', value)
-            console.log('Nabigate to App')
-            console.log(value)
+            const result = setValueToStorage('@PIN', value)
+            console.log(result)
 
             // this.props.navigation.navigate('App')
         } catch (error) {
