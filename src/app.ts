@@ -2,6 +2,8 @@ import { Navigation } from 'react-native-navigation'
 import { Dimensions } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { registerScreens } from './screens'
+import { getValueFromStorage } from './helpers/storageHelper'
+import { NAVIGATOR_NAME } from './constants/navigator'
 
 const { height, width } = Dimensions.get('window')
 
@@ -22,14 +24,17 @@ export const start = () => {
 
     registerScreens()
 
-    Navigation.events().registerAppLaunchedListener(() => {
+    Navigation.events().registerAppLaunchedListener(async () => {
+        const storeHasData = await checkDataStorage()
+        const name = storeHasData ? `${NAVIGATOR_NAME}LoginScreen` : `${NAVIGATOR_NAME}RegisterScreen`
+
         Navigation.setRoot({
             root: {
                 stack: {
                     children: [
                         {
                             component: {
-                                name: 'navigation.chat_rn.RegisterScreen',
+                                name,
                             },
                         },
                     ],
@@ -37,4 +42,13 @@ export const start = () => {
             },
         })
     })
+}
+
+/**
+ * Проверка, есть ли данные в хранилище
+ */
+const checkDataStorage = async () => {
+    const value = await getValueFromStorage('@PIN')
+
+    return !!value
 }
