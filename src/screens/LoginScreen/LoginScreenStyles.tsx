@@ -20,20 +20,4 @@ export default EStyleSheet.create({
         alignItems: 'center',
         marginTop: getRemValue(72),
     },
-    inputContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: getRemValue(30),
-    },
-    circle: {
-        width: getRemValue(14),
-        height: getRemValue(14),
-        borderRadius: getRemValue(7),
-        borderWidth: 2,
-        borderColor: '#fff',
-        marginHorizontal: getRemValue(14),
-    },
-    circleFill: {
-        backgroundColor: '#fff',
-    },
 })

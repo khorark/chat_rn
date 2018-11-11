@@ -8,6 +8,7 @@ import Image from 'react-native-remote-svg'
 
 import { colors } from '../../constants/colors'
 import styles from './LoginScreenStyles'
+import Indicator from '../../components/Indicator/Indicator'
 
 interface ILoginScreenState {
     pass: string
@@ -28,11 +29,7 @@ export default class LoginScreen extends PureComponent<{}, ILoginScreenState> {
                         <Image source={require('../../assets/images/logo.svg')} style={styles.logoImage}/>
                     </View>
                     <View style={styles.centerContainer}>
-                        <View style={styles.inputContainer}>
-                            {Array.from(Array(4).keys()).map((key: number) => (
-                                <View key={key} style={[styles.circle, pass.length > key ? styles.circleFill : null]}/>
-                            ))}
-                        </View>
+                        <Indicator length={pass.length}/>
                     </View>
                 </LinearGradient>
             </View>
