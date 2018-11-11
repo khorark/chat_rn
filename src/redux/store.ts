@@ -5,7 +5,7 @@ import rootReducer, { initialState as state } from './reducer';
 import { IReduxState } from '../types/reducer'
 
 
-export default (initialState = state): Store<IReduxState> => {
+export default ((initialState = state): Store<IReduxState> => {
     // @ts-ignore
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -25,4 +25,4 @@ export default (initialState = state): Store<IReduxState> => {
     }
 
     return store as any;
-}
+})()
