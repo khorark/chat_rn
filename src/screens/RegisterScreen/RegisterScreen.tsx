@@ -2,24 +2,30 @@ import React, { PureComponent } from 'react'
 import { View, TextInput, NativeSyntheticEvent, TextInputSubmitEditingEventData, ScrollView } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Image from 'react-native-remote-svg'
+import { ComponentEvent } from 'react-native-navigation'
 
 import styles from './RegisterScreenStyles'
 import { colors } from '../../constants/colors'
 import { setValueToStorage } from '../../helpers/storageHelper'
 import TouchableComponent from '../../components/TouchableComponent/TouchableComponent'
+import { changeScreen } from '../../helpers/navigatorHelper'
+import { NAVIGATOR_NAME } from '../../constants/navigator'
+
 
 interface IRegisterState {
     securityText: boolean
     pass: string
 }
 
-export default class RegisterScreen extends PureComponent<{}, IRegisterState> {
+export default class RegisterScreen extends PureComponent<ComponentEvent, IRegisterState> {
     public state = {
         securityText: true,
         pass: '',
     }
 
     public render() {
+        console.log('this.props', this.props)
+
         return (
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <LinearGradient colors={[colors.turquoiseapprox, colors.iceCold]} style={styles.mainContainer}>
@@ -66,10 +72,8 @@ export default class RegisterScreen extends PureComponent<{}, IRegisterState> {
             return false
         }
         try {
-            const result = setValueToStorage('@PIN', value)
-            console.log(result)
-
-            // this.props.navigation.navigate('App')
+            await setValueToStorage('@PIN', value)
+            changeScreen(this.props.componentId, `${NAVIGATOR_NAME}LoginScreen`)
         } catch (error) {
             console.error('Error saving data: ', error)
         }
