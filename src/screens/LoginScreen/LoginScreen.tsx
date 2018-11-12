@@ -2,7 +2,7 @@
  * Created by arkadiy on 11.11.18.
  */
 import React, { PureComponent } from 'react'
-import { View } from 'react-native'
+import { View, TouchableOpacity, Text } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Image from 'react-native-remote-svg'
 
@@ -30,6 +30,25 @@ export default class LoginScreen extends PureComponent<{}, ILoginScreenState> {
                     </View>
                     <View style={styles.centerContainer}>
                         <Indicator length={pass.length}/>
+
+                        <View style={styles.containerNumPad}>
+                            {Array.from(Array(9).keys()).map((key: number) => (
+                                <TouchableOpacity key={key} style={styles.numberContainer}>
+                                    <Text style={styles.numberText}>{key + 1}</Text>
+                                </TouchableOpacity>
+                            ))}
+                            <View style={styles.bottomNumPad}>
+                                <TouchableOpacity style={styles.numberContainer}>
+                                    <Text style={styles.numberText}>0</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.deleteContainer}>
+                                    <Image
+                                        source={require('../../assets/images/delete.svg')}
+                                        style={styles.deleteImage}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
                     </View>
                 </LinearGradient>
             </View>
