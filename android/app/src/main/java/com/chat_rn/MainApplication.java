@@ -3,6 +3,7 @@ package com.chat_rn;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -38,7 +39,8 @@ public class MainApplication extends NavigationApplication {
         // Add additional packages you require here
         // No need to add RnnPackage and MainReactPackage
         return Arrays.<ReactPackage>asList(
-            new LinearGradientPackage()
+            new LinearGradientPackage(),
+            new SvgPackage()
             // eg. new VectorIconsPackage()
         );
     }
