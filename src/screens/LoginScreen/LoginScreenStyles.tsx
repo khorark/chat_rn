@@ -13,10 +13,6 @@ export default EStyleSheet.create({
         marginTop: getRemValue(36),
         marginLeft: getRemValue(30),
     },
-    logoImage: {
-        width: getRemValue(235),
-        height: getRemValue(69),
-    },
     centerContainer: {
         alignItems: 'center',
         marginTop: getRemValue(72),

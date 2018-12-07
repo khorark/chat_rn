@@ -4,11 +4,13 @@
 import React, { PureComponent } from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
-import Image from 'react-native-remote-svg'
 
 import { colors } from '../../constants/colors'
 import styles from './LoginScreenStyles'
 import Indicator from '../../components/Indicator/Indicator'
+import DeleteIcon from '../../assets/images/DeleteIcon'
+import LogoIcon from '../../assets/images/LogoIcon'
+
 
 interface ILoginScreenState {
     pass: string
@@ -26,7 +28,7 @@ export default class LoginScreen extends PureComponent<{}, ILoginScreenState> {
             <View style={styles.mainContainer}>
                 <LinearGradient colors={[colors.turquoiseapprox, colors.iceCold]} style={styles.lineGDContainer}>
                     <View style={styles.imageContainer}>
-                        <Image source={require('../../assets/images/logo.svg')} style={styles.logoImage}/>
+                        <LogoIcon width={235} height={69} fill={'#fff'}/>
                     </View>
                     <View style={styles.centerContainer}>
                         <Indicator length={pass.length}/>
@@ -42,10 +44,7 @@ export default class LoginScreen extends PureComponent<{}, ILoginScreenState> {
                                     <Text style={styles.numberText}>0</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.deleteContainer}>
-                                    <Image
-                                        source={require('../../assets/images/delete.svg')}
-                                        style={styles.deleteImage}
-                                    />
+                                    <DeleteIcon width={45} height={33} fill={'#fff'}/>
                                 </TouchableOpacity>
                             </View>
                         </View>

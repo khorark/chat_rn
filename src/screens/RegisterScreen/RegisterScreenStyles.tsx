@@ -13,10 +13,6 @@ export default EStyleSheet.create({
         marginTop: getRemValue(128),
         marginLeft: getRemValue(-94),
     },
-    logoImage: {
-        width: getRemValue(414),
-        height: getRemValue(120),
-    },
     inputContainer: {
         width: getRemValue(315),
         height: getRemValue(44),
@@ -41,9 +37,5 @@ export default EStyleSheet.create({
     },
     eyeContainer: {
         alignSelf: 'center',
-    },
-    eyeImage: {
-        width: getRemValue(18),
-        height: getRemValue(14),
     },
 })

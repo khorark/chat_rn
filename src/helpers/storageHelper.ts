@@ -17,3 +17,8 @@ export const setValueToStorage = async (valueName: string, value: string ) => {
     return await AsyncStorage.setItem(valueName, value)
 }
 
+/**
+ * Проверка, есть ли данные в хранилище
+ */
+export const checkDataStorage = async (valueName: string) => !!await getValueFromStorage(valueName)
+

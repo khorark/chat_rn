@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import { View, TextInput, NativeSyntheticEvent, TextInputSubmitEditingEventData, ScrollView } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
-import Image from 'react-native-remote-svg'
 import { ComponentEvent } from 'react-native-navigation'
 
 import styles from './RegisterScreenStyles'
@@ -10,6 +9,8 @@ import { setValueToStorage } from '../../helpers/storageHelper'
 import TouchableComponent from '../../components/TouchableComponent/TouchableComponent'
 import { changeScreen } from '../../helpers/navigatorHelper'
 import { NAVIGATOR_NAME } from '../../constants/navigator'
+import LogoIcon from '../../assets/images/LogoIcon'
+import OpenEyeIcon from '../../assets/images/OpenEyeIcon'
 
 
 interface IRegisterState {
@@ -30,7 +31,7 @@ export default class RegisterScreen extends PureComponent<ComponentEvent, IRegis
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <LinearGradient colors={[colors.turquoiseapprox, colors.iceCold]} style={styles.mainContainer}>
                     <View style={styles.imageContainer}>
-                        <Image source={require('../../assets/images/logo.svg')} style={styles.logoImage} />
+                        <LogoIcon width={414} height={120} fill={'#fff'}/>
                     </View>
                     <ScrollView
                         keyboardShouldPersistTaps={'always'}
@@ -49,9 +50,9 @@ export default class RegisterScreen extends PureComponent<ComponentEvent, IRegis
                             secureTextEntry={this.state.securityText}
                             underlineColorAndroid={'transparent'}
                         />
-                        <View style={styles.delimeter} />
+                        <View style={styles.delimeter}/>
                         <TouchableComponent style={styles.eyeContainer} onPress={this.handleToggleHideMode}>
-                            <Image source={require('../../assets/images/open_eye.svg')} style={styles.eyeImage} />
+                            <OpenEyeIcon width={18} heigth={14}/>
                         </TouchableComponent>
                     </ScrollView>
                 </LinearGradient>
