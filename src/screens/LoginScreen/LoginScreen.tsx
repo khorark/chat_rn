@@ -8,9 +8,8 @@ import LinearGradient from 'react-native-linear-gradient'
 import { colors } from '../../constants/colors'
 import styles from './LoginScreenStyles'
 import Indicator from '../../components/Indicator/Indicator'
-import DeleteIcon from '../../assets/images/DeleteIcon'
 import LogoIcon from '../../assets/images/LogoIcon'
-
+import NumPad from '../../components/NumPad/NumPad'
 
 interface ILoginScreenState {
     pass: string
@@ -28,29 +27,27 @@ export default class LoginScreen extends PureComponent<{}, ILoginScreenState> {
             <View style={styles.mainContainer}>
                 <LinearGradient colors={[colors.turquoiseapprox, colors.iceCold]} style={styles.lineGDContainer}>
                     <View style={styles.imageContainer}>
-                        <LogoIcon width={235} height={69} fill={'#fff'}/>
+                        <LogoIcon width={235} height={69} fill={'#fff'} />
                     </View>
                     <View style={styles.centerContainer}>
-                        <Indicator length={pass.length}/>
-
-                        <View style={styles.containerNumPad}>
-                            {Array.from(Array(9).keys()).map((key: number) => (
-                                <TouchableOpacity key={key} style={styles.numberContainer}>
-                                    <Text style={styles.numberText}>{key + 1}</Text>
-                                </TouchableOpacity>
-                            ))}
-                            <View style={styles.bottomNumPad}>
-                                <TouchableOpacity style={styles.numberContainer}>
-                                    <Text style={styles.numberText}>0</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.deleteContainer}>
-                                    <DeleteIcon width={45} height={33} fill={'#fff'}/>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
+                        <Indicator length={pass.length} />
+                        <NumPad handlePressKey={this.handlePressKey} />
                     </View>
                 </LinearGradient>
             </View>
         )
+    }
+
+    private handlePressKey(value: string) {
+        console.log('value => ', value)
+        let pass = ''
+
+        if (value === 'del') {
+            pass = this.state.pass.slice(0, -1)
+        } else {
+            pass = this.state.pass + value
+        }
+
+        this.setState({ pass })
     }
 }
