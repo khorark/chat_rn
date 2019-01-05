@@ -7,7 +7,7 @@
         "test": "jest",
         "android": "react-native run-android",
         "ios": "react-native run-ios",
-        "emulator": "cd /home/arkadiy/Android/Sdk/tools && ./emulator -avd Pixel_2_API_24",
+        "emulator": "cd /home/arkadiy/Android/Sdk/tools && ./emulator -avd Pixel_2_API_26",
         "lint": "tslint -c tslint.json --fix 'src/**/*.{ts,tsx}'",
         "prettier": "prettier --write **/*.js"
     },
