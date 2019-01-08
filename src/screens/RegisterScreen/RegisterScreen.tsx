@@ -1,84 +1,43 @@
 import React, { PureComponent } from 'react'
-import { View, TextInput, NativeSyntheticEvent, TextInputSubmitEditingEventData, ScrollView } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { ComponentEvent } from 'react-native-navigation'
 
 import styles from './RegisterScreenStyles'
 import { colors } from '../../constants/colors'
 import { setValueToStorage } from '../../helpers/storageHelper'
-import TouchableComponent from '../../components/TouchableComponent/TouchableComponent'
 import { changeScreen } from '../../helpers/navigatorHelper'
 import { NAVIGATOR_NAME } from '../../constants/navigator'
 import LogoIcon from '../../assets/images/LogoIcon'
-import OpenEyeIcon from '../../assets/images/OpenEyeIcon'
 import { PIN } from '../../constants/storage'
+import IInputPin from '../../components/InputPin/InputPin'
 
-interface IRegisterState {
-    securityText: boolean
-    pass: string
-}
-
-export default class RegisterScreen extends PureComponent<ComponentEvent, IRegisterState> {
-    public state = {
-        securityText: true,
-        pass: '',
-    }
-
+export default class RegisterScreen extends PureComponent<ComponentEvent> {
     public render() {
-        console.log('this.props', this.props)
-
         return (
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <LinearGradient colors={[colors.turquoiseapprox, colors.iceCold]} style={styles.mainContainer}>
                     <View style={styles.imageContainer}>
-                        <LogoIcon width={414} height={120} fill={'#fff'} />
+                        <LogoIcon width={414} height={120} fill={colors.white} />
                     </View>
-                    <ScrollView
-                        keyboardShouldPersistTaps={'always'}
-                        keyboardDismissMode={'on-drag'}
-                        contentContainerStyle={styles.inputContainer}
-                    >
-                        <TextInput
-                            style={styles.input}
-                            keyboardType={'numeric'}
-                            maxLength={4}
-                            multiline={false}
-                            returnKeyType={'done'}
-                            textContentType={'password'}
-                            onSubmitEditing={this.onSubmitEditing}
-                            onChangeText={this.onChangeText}
-                            secureTextEntry={this.state.securityText}
-                            underlineColorAndroid={'transparent'}
-                        />
-                        <View style={styles.delimeter} />
-                        <TouchableComponent style={styles.eyeContainer} onPress={this.handleToggleHideMode}>
-                            <OpenEyeIcon width={18} heigth={14} />
-                        </TouchableComponent>
-                    </ScrollView>
+                    <IInputPin onCallback={this.handleInputOnSubmitEditing} />
                 </LinearGradient>
             </ScrollView>
         )
     }
 
-    private onSubmitEditing = (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
-        this.storeData()
-    }
-
-    private onChangeText = (pass: string) => this.setState({ pass })
-
-    private storeData = async () => {
-        const value = this.state.pass
-
-        if (!value) {
-            return false
-        }
+    private savePassToStorage = async (value: string) => {
         try {
             await setValueToStorage(PIN, value)
-            changeScreen(this.props.componentId, `${NAVIGATOR_NAME}LoginScreen`)
+            return true
         } catch (error) {
             console.error('Error saving data: ', error)
+            return false
         }
     }
 
-    private handleToggleHideMode = (): void => this.setState({ securityText: !this.state.securityText })
+    private handleInputOnSubmitEditing = async (value: string) => {
+        const isSave = await this.savePassToStorage(value)
+        if (isSave) changeScreen(this.props.componentId, `${NAVIGATOR_NAME}ChatScreen`)
+    }
 }
