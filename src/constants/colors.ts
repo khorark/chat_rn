@@ -6,4 +6,6 @@ export const colors = {
     robinSEggBlue: '#90f7ec',
     tealish: '#32ccbc',
     purplyPink: '#f790e7',
+    galleryapprox: '#ebebeb',
+    gray: '#d8d8d8',
 }
