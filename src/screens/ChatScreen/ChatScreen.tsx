@@ -1,7 +1,21 @@
-import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import React, { PureComponent } from 'react'
+import { View, StyleSheet, BackHandler } from 'react-native'
 
-const ChatScreen = () => <View style={styles.mainContainer} />
+export default class ChatScreen extends PureComponent {
+    public componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick)
+    }
+
+    public componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick)
+    }
+
+    public render() {
+        return <View style={styles.mainContainer} />
+    }
+
+    private handleBackButtonClick = () => true
+}
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -9,5 +23,3 @@ const styles = StyleSheet.create({
         backgroundColor: 'green',
     },
 })
-
-export default ChatScreen
