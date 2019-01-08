@@ -1,3 +1,4 @@
+import { PIN } from './constants/storage'
 import { Navigation } from 'react-native-navigation'
 import { Dimensions } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
@@ -25,7 +26,7 @@ export const start = () => {
     registerScreens()
 
     Navigation.events().registerAppLaunchedListener(async () => {
-        const storeHasData = await checkDataStorage('@PIN')
+        const storeHasData = await checkDataStorage(PIN)
         const name = storeHasData ? `${NAVIGATOR_NAME}LoginScreen` : `${NAVIGATOR_NAME}RegisterScreen`
 
         Navigation.setRoot({
