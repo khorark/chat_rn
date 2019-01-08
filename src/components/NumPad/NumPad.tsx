@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 
@@ -58,6 +58,12 @@ const styles = EStyleSheet.create({
         fontWeight: '100',
         color: '#fefefe',
     },
+    deleteContainer: {
+        position: 'absolute',
+        top: 35,
+        right: 65,
+        // marginLeft: 130,
+    },
 })
 
-export default NumPad
+export default memo(NumPad)
