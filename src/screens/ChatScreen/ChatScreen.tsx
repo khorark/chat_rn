@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react'
-import { View, StyleSheet, BackHandler } from 'react-native'
+import { View, StyleSheet, BackHandler, ScrollView } from 'react-native'
+import { colors } from '../../constants/colors'
+import { getRemValue } from '../../helpers/stylesHelper'
+import InputMessage from '../../components/InputMessage/InputMessage'
 
 export default class ChatScreen extends PureComponent {
     public componentWillMount() {
@@ -11,15 +14,28 @@ export default class ChatScreen extends PureComponent {
     }
 
     public render() {
-        return <View style={styles.mainContainer} />
+        return (
+            <View style={styles.mainContainer}>
+                <ScrollView contentContainerStyle={styles.messagesContainer} />
+                <InputMessage />
+            </View>
+        )
     }
 
-    private handleBackButtonClick = () => true
+    private handleBackButtonClick = () => {
+        BackHandler.exitApp()
+        return false
+    }
 }
 
 const styles = StyleSheet.create({
     mainContainer: {
         flexGrow: 1,
-        backgroundColor: 'green',
+        backgroundColor: colors.galleryapprox,
+        paddingHorizontal: 16,
+        paddingVertical: 17,
+    },
+    messagesContainer: {
+        flexGrow: 1,
     },
 })
