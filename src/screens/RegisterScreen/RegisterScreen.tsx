@@ -11,7 +11,7 @@ import { changeScreen } from '../../helpers/navigatorHelper'
 import { NAVIGATOR_NAME } from '../../constants/navigator'
 import LogoIcon from '../../assets/images/LogoIcon'
 import OpenEyeIcon from '../../assets/images/OpenEyeIcon'
-
+import { PIN } from '../../constants/storage'
 
 interface IRegisterState {
     securityText: boolean
@@ -31,7 +31,7 @@ export default class RegisterScreen extends PureComponent<ComponentEvent, IRegis
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <LinearGradient colors={[colors.turquoiseapprox, colors.iceCold]} style={styles.mainContainer}>
                     <View style={styles.imageContainer}>
-                        <LogoIcon width={414} height={120} fill={'#fff'}/>
+                        <LogoIcon width={414} height={120} fill={'#fff'} />
                     </View>
                     <ScrollView
                         keyboardShouldPersistTaps={'always'}
@@ -50,9 +50,9 @@ export default class RegisterScreen extends PureComponent<ComponentEvent, IRegis
                             secureTextEntry={this.state.securityText}
                             underlineColorAndroid={'transparent'}
                         />
-                        <View style={styles.delimeter}/>
+                        <View style={styles.delimeter} />
                         <TouchableComponent style={styles.eyeContainer} onPress={this.handleToggleHideMode}>
-                            <OpenEyeIcon width={18} heigth={14}/>
+                            <OpenEyeIcon width={18} heigth={14} />
                         </TouchableComponent>
                     </ScrollView>
                 </LinearGradient>
@@ -73,7 +73,7 @@ export default class RegisterScreen extends PureComponent<ComponentEvent, IRegis
             return false
         }
         try {
-            await setValueToStorage('@PIN', value)
+            await setValueToStorage(PIN, value)
             changeScreen(this.props.componentId, `${NAVIGATOR_NAME}LoginScreen`)
         } catch (error) {
             console.error('Error saving data: ', error)
