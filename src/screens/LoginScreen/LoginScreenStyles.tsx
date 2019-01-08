@@ -17,16 +17,4 @@ export default EStyleSheet.create({
         alignItems: 'center',
         marginTop: getRemValue(72),
     },
-
-    deleteImage: {
-        width: getRemValue(45),
-        height: getRemValue(33),
-        // color: colors.white,
-    },
-    deleteContainer: {
-        position: 'absolute',
-        top: 35,
-        right: 65,
-        // marginLeft: 130,
-    },
 })
