@@ -1,4 +1,4 @@
-import React, { PureComponent, createRef } from 'react'
+import React, { PureComponent } from 'react'
 import {
     View,
     Image,
@@ -6,6 +6,7 @@ import {
     TextInput,
     NativeSyntheticEvent,
     TextInputContentSizeChangeEventData,
+    Keyboard,
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 
@@ -14,17 +15,26 @@ import TouchableComponent from '../TouchableComponent/TouchableComponent'
 import SendIcon from '../../assets/images/SendIcon'
 import { colors } from '../../constants/colors'
 
-export default class InputMessage extends PureComponent {
+interface InputMessageProps {
+    onCallback: (value: string) => void
+}
+
+interface InputMessageState {
+    text: string
+    height: number
+}
+
+export default class InputMessage extends PureComponent<InputMessageProps, InputMessageState> {
     public state = {
+        text: '',
         height: 44,
     }
 
     private readonly MAX_HEIGHT_INPUT = 160
-
-    private inputRef: React.RefObject<TextInput> = createRef()
+    private readonly PLACEHOLDER = 'Напишите что-то...'
 
     public render() {
-        const { height } = this.state
+        const { text, height } = this.state
 
         return (
             <View style={styles.mainContainer}>
@@ -35,19 +45,23 @@ export default class InputMessage extends PureComponent {
                     contentContainerStyle={[styles.inputContainer, { height }]}
                 >
                     <TextInput
-                        ref={this.inputRef}
+                        value={text}
                         style={styles.input}
                         multiline={true}
+                        placeholder={this.PLACEHOLDER}
                         underlineColorAndroid={'transparent'}
+                        onChangeText={this.onChangeText}
                         onContentSizeChange={this.onContentSizeChange}
                     />
-                    <TouchableComponent style={styles.sendContainer}>
-                        <SendIcon width={22} height={21} fill={colors.gray} />
+                    <TouchableComponent style={styles.sendContainer} onPress={this.sendText}>
+                        <SendIcon width={22} height={21} fill={text ? colors.tealish : colors.gray} />
                     </TouchableComponent>
                 </ScrollView>
             </View>
         )
     }
+
+    private onChangeText = (text: string) => this.setState({ text })
 
     private onContentSizeChange = (e: NativeSyntheticEvent<TextInputContentSizeChangeEventData>) =>
         this.updateSize(e.nativeEvent.contentSize.height)
@@ -58,6 +72,14 @@ export default class InputMessage extends PureComponent {
                 height,
             })
         }
+    }
+
+    private sendText = () => {
+        if (this.state.text) {
+            this.props.onCallback(this.state.text)
+            this.setState({ text: '' })
+        }
+        Keyboard.dismiss()
     }
 }
 

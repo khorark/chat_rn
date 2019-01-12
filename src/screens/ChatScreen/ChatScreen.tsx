@@ -17,7 +17,7 @@ export default class ChatScreen extends PureComponent {
         return (
             <View style={styles.mainContainer}>
                 <ScrollView contentContainerStyle={styles.messagesContainer} />
-                <InputMessage />
+                <InputMessage onCallback={this.handleSendMessage} />
             </View>
         )
     }
@@ -25,6 +25,10 @@ export default class ChatScreen extends PureComponent {
     private handleBackButtonClick = () => {
         BackHandler.exitApp()
         return false
+    }
+
+    private handleSendMessage = (text: string) => {
+        console.log(text)
     }
 }
 
