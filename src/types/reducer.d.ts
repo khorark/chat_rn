@@ -1,4 +1,8 @@
 export interface IReduxState {
+    chat: IChatState
+}
+
+export interface IChatState {
     messages: IMessage[]
     isLoading: boolean
 }

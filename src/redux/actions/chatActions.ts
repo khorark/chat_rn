@@ -2,7 +2,7 @@
  * Created by arkadiy on 06.09.18.
  */
 import { ActionCreator, ActionCreatorsMapObject } from 'redux'
-import { IAddMessagePayload, ILoading, IRemoveMessagePayload } from '../types/actions'
+import { IAddMessagePayload, ILoading, IRemoveMessagePayload } from '../../types/actions'
 
 export enum Type {
     GET_MESSAGES = '@@chat/GET_MESSAGES',
@@ -10,7 +10,6 @@ export enum Type {
     REMOVE_MESSAGE = '@@chat/REMOVE_MESSAGE',
     IS_LOADING = '@@chat/IS_LOADING',
 }
-
 
 export const getMessages = () => (dispatch: any) => {
     dispatch(changeLoadingStatus(true))

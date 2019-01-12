@@ -1,5 +1,5 @@
 import { Action, AnyAction } from 'redux'
-import { Type } from '../redux/actions'
+import { Type } from '../redux/actions/chatActions'
 import { IMessage } from './reducer'
 
 export interface IAddMessage extends Action {

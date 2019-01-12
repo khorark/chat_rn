@@ -1,15 +1,16 @@
-import { AnyAction } from 'redux';
-import { ChatActions } from '../types/actions'
-import { IReduxState } from '../types/reducer'
-import { Type } from './actions'
+import { ChatActions } from '../../types/actions'
+import { IChatState } from '../../types/reducer'
+import { Type } from '../actions/chatActions'
 
-export const initialState: IReduxState = {
+export const initialState: IChatState = {
     messages: [],
     isLoading: false,
 }
 
-const reducer = (state = initialState, action: ChatActions) => {
-    if (!state) { return state; }
+const chatReducer = (state = initialState, action: ChatActions) => {
+    if (!state) {
+        return state
+    }
 
     let messages
     switch (action.type) {
@@ -21,10 +22,10 @@ const reducer = (state = initialState, action: ChatActions) => {
             messages = [...state.messages].filter(({ id }) => id !== action.id)
             return { ...state, messages }
         case Type.IS_LOADING:
-            return {...state, isLoading: action.isLoading}
+            return { ...state, isLoading: action.isLoading }
         default:
             return state
     }
 }
 
-export default reducer
+export default chatReducer
