@@ -41,12 +41,9 @@ export default class InputMessage extends PureComponent {
                         underlineColorAndroid={'transparent'}
                         onContentSizeChange={this.onContentSizeChange}
                     />
-                    <View style={styles.delimeter} />
-                    <View style={styles.rightArea}>
-                        <TouchableComponent style={styles.sendContainer}>
-                            <SendIcon width={22} heigth={21} fill={colors.gray} />
-                        </TouchableComponent>
-                    </View>
+                    <TouchableComponent style={styles.sendContainer}>
+                        <SendIcon width={22} height={21} fill={colors.gray} />
+                    </TouchableComponent>
                 </ScrollView>
             </View>
         )
@@ -89,22 +86,13 @@ const styles = EStyleSheet.create({
     input: {
         flex: 1,
     },
-    delimeter: {
-        marginVertical: getRemValue(5),
-        backgroundColor: colors.alto,
-        width: getRemValue(1),
-        marginHorizontal: 10,
-    },
-    rightArea: {
-        backgroundColor: 'green',
-    },
     sendContainer: {
-        // height: '100%',
-        // alignSelf: 'center',
-        // alignItems: 'flex-end',
-        // justifyContent: 'center',
-        backgroundColor: 'blue',
-        // marginTop: 'auto',
-        // paddingVertical: 60,
+        flexDirection: 'row',
+        borderColor: colors.alto,
+        borderLeftWidth: 1,
+        paddingHorizontal: getRemValue(10),
+        paddingBottom: getRemValue(5),
+        marginVertical: getRemValue(5),
+        alignItems: 'flex-end',
     },
 })
