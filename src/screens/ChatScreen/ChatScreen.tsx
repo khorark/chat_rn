@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react'
 import { View, StyleSheet, BackHandler, ScrollView } from 'react-native'
+import { connect } from 'react-redux'
+
 import { colors } from '../../constants/colors'
 import { getRemValue } from '../../helpers/stylesHelper'
 import InputMessage from '../../components/InputMessage/InputMessage'
 
+@(connect as any)()
 export default class ChatScreen extends PureComponent {
     public componentWillMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick)

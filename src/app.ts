@@ -1,12 +1,15 @@
-import { PIN } from './constants/storage'
 import { Navigation } from 'react-native-navigation'
 import { Dimensions } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+
+import createStore from './redux/store'
 import { registerScreens } from './screens'
 import { checkDataStorage, setValueToStorage } from './helpers/storageHelper'
 import { NAVIGATOR_NAME } from './constants/navigator'
+import { PIN } from './constants/storage'
 
 const { height, width } = Dimensions.get('window')
+const store = createStore()
 
 export const start = () => {
     EStyleSheet.build({
@@ -15,7 +18,7 @@ export const start = () => {
         $rem: width > 340 ? 18 : 16,
     })
 
-    registerScreens()
+    registerScreens(store)
 
     Navigation.events().registerAppLaunchedListener(async () => {
         Navigation.setDefaultOptions({
