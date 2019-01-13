@@ -14,6 +14,9 @@ const chatReducer = (state = initialState, action: ChatActions) => {
 
     let messages
     switch (action.type) {
+        case Type.GET_MESSAGES:
+            messages = action.payload
+            return { ...state, messages }
         case Type.SEND_MESSAGE:
             messages = [...state.messages]
             messages.push(action.message)

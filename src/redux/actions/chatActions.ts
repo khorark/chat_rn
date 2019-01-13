@@ -2,7 +2,9 @@
  * Created by arkadiy on 06.09.18.
  */
 import { ActionCreator, ActionCreatorsMapObject, Dispatch } from 'redux'
+
 import { ISendMessagePayload, ILoading, IRemoveMessagePayload } from '../../types/actions'
+import { data } from '../../assets/data.json'
 
 export enum Type {
     GET_MESSAGES = '@@chat/GET_MESSAGES',
@@ -16,7 +18,7 @@ export const getMessages = () => (dispatch: Dispatch) => {
     setTimeout(() => {
         dispatch(changeLoadingStatus(false))
         dispatch({
-            payload: {},
+            payload: data,
             type: Type.GET_MESSAGES,
         })
     }, 1000)

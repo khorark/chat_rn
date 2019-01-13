@@ -2,6 +2,10 @@ import { Action, AnyAction } from 'redux'
 import { Type } from '../redux/actions/chatActions'
 import { IMessage } from './reducer'
 
+export interface IGetMessage extends Action {
+    type: Type.GET_MESSAGES
+    payload: IMessage[]
+}
 export interface ISendMessage extends Action, ISendMessagePayload {
     type: Type.SEND_MESSAGE
 }
@@ -24,4 +28,4 @@ export interface IRemoveMessagePayload {
     id: string
 }
 
-export type ChatActions = ISendMessage | IRemoveMessage | ILoading
+export type ChatActions = IGetMessage | ISendMessage | IRemoveMessage | ILoading

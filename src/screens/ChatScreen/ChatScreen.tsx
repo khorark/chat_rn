@@ -35,7 +35,8 @@ const mapDispatchTopProps = (disptach: Dispatch) => ({
 
 @(connect as any)(mapStateTopProps, mapDispatchTopProps)
 export default class ChatScreen extends PureComponent<IChatScreenProps> {
-    public componentWillMount() {
+    public componentDidMount() {
+        this.props.getMessages()
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick)
     }
 
