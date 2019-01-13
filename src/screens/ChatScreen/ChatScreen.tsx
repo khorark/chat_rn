@@ -1,12 +1,25 @@
 import React, { PureComponent } from 'react'
 import { View, StyleSheet, BackHandler, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
+import { Dispatch, bindActionCreators } from 'redux'
 
 import { colors } from '../../constants/colors'
-import { getRemValue } from '../../helpers/stylesHelper'
 import InputMessage from '../../components/InputMessage/InputMessage'
+import { IReduxState } from '../../types/reducer'
+import { getMessages, addMessage, removeMessage } from '../../redux/actions/chatActions'
 
-@(connect as any)()
+const mapStateTopProps = ({ chat }: IReduxState) => ({
+    messages: chat.messages,
+    isLoading: chat.messages,
+})
+
+const mapDispatchTopProps = (disptach: Dispatch) => ({
+    getMessages: bindActionCreators(getMessages, disptach),
+    addMessage: bindActionCreators(addMessage, disptach),
+    removeMessage: bindActionCreators(removeMessage, disptach),
+})
+
+@(connect as any)(mapStateTopProps, mapDispatchTopProps)
 export default class ChatScreen extends PureComponent {
     public componentWillMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick)
@@ -17,6 +30,8 @@ export default class ChatScreen extends PureComponent {
     }
 
     public render() {
+        console.log(this.props)
+
         return (
             <View style={styles.mainContainer}>
                 <ScrollView contentContainerStyle={styles.messagesContainer} />

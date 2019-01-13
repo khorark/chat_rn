@@ -1,7 +1,7 @@
 /**
  * Created by arkadiy on 06.09.18.
  */
-import { ActionCreator, ActionCreatorsMapObject } from 'redux'
+import { ActionCreator, ActionCreatorsMapObject, Dispatch } from 'redux'
 import { IAddMessagePayload, ILoading, IRemoveMessagePayload } from '../../types/actions'
 
 export enum Type {
@@ -11,7 +11,7 @@ export enum Type {
     IS_LOADING = '@@chat/IS_LOADING',
 }
 
-export const getMessages = () => (dispatch: any) => {
+export const getMessages = () => (dispatch: Dispatch) => {
     dispatch(changeLoadingStatus(true))
     setTimeout(() => {
         dispatch(changeLoadingStatus(false))
@@ -22,7 +22,7 @@ export const getMessages = () => (dispatch: any) => {
     }, 1000)
 }
 
-export const addMessage = ({ message }: IAddMessagePayload) => (dispatch: any) => {
+export const addMessage = ({ message }: IAddMessagePayload) => (dispatch: Dispatch) => {
     dispatch(changeLoadingStatus(true))
     setTimeout(() => {
         dispatch(changeLoadingStatus(false))
@@ -33,7 +33,7 @@ export const addMessage = ({ message }: IAddMessagePayload) => (dispatch: any) =
     }, 1000)
 }
 
-export const removeMessage = ({ id }: IRemoveMessagePayload) => (dispatch: any) => {
+export const removeMessage = ({ id }: IRemoveMessagePayload) => (dispatch: Dispatch) => {
     dispatch(changeLoadingStatus(true))
     setTimeout(() => {
         dispatch(changeLoadingStatus(false))
