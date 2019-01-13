@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react'
-import { View, BackHandler, FlatList } from 'react-native'
+import React, { PureComponent, createRef } from 'react'
+import { View, BackHandler, FlatList, RefreshControl } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { connect } from 'react-redux'
 import { Dispatch, bindActionCreators } from 'redux'
@@ -24,7 +24,7 @@ interface IChatScreenProps extends ComponentEvent, IDispatchProps, IChatState {}
 
 const mapStateTopProps = ({ chat }: IReduxState) => ({
     messages: chat.messages,
-    isLoading: chat.messages,
+    isLoading: chat.isLoading,
 })
 
 const mapDispatchTopProps = (disptach: Dispatch) => ({
@@ -35,6 +35,8 @@ const mapDispatchTopProps = (disptach: Dispatch) => ({
 
 @(connect as any)(mapStateTopProps, mapDispatchTopProps)
 export default class ChatScreen extends PureComponent<IChatScreenProps> {
+    private flatListRef: React.RefObject<FlatList<IMessage>> = createRef()
+
     public componentDidMount() {
         this.props.getMessages()
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick)
@@ -51,13 +53,17 @@ export default class ChatScreen extends PureComponent<IChatScreenProps> {
     public renderItemSeparator = () => <View style={styles.separator} />
 
     public render() {
-        const { messages } = this.props
+        const { messages, isLoading } = this.props
 
         return (
             <View style={styles.mainContainer}>
                 <FlatList
+                    ref={this.flatListRef}
+                    onContentSizeChange={this.scrollToEnd}
+                    onLayout={this.scrollToEnd}
                     data={messages}
                     contentContainerStyle={styles.messagesContainer}
+                    refreshControl={<RefreshControl refreshing={isLoading} colors={[colors.tealish]} />}
                     extraData={messages.length}
                     renderItem={this.renderItem}
                     ItemSeparatorComponent={this.renderItemSeparator}
@@ -89,17 +95,20 @@ export default class ChatScreen extends PureComponent<IChatScreenProps> {
     private handleRemoveMessage = (id: string) => this.props.removeMessage({ id })
 
     private keyExtractor = ({ id }: IMessage) => id
+
+    private scrollToEnd = () => this.flatListRef.current && this.flatListRef.current.scrollToEnd()
 }
 
 const styles = EStyleSheet.create({
     mainContainer: {
-        flexGrow: 1,
+        flex: 1,
         backgroundColor: colors.galleryapprox,
         paddingHorizontal: getRemValue(16),
         paddingVertical: getRemValue(17),
     },
     messagesContainer: {
         flexGrow: 1,
+        paddingBottom: getRemValue(20),
     },
     separator: {
         height: getRemValue(20),
