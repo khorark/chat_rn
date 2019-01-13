@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import {
     View,
-    Image,
     ScrollView,
     TextInput,
     NativeSyntheticEvent,
@@ -14,6 +13,7 @@ import { getRemValue } from '../../helpers/stylesHelper'
 import TouchableComponent from '../TouchableComponent/TouchableComponent'
 import SendIcon from '../../assets/images/SendIcon'
 import { colors } from '../../constants/colors'
+import Avatar from '../Avatar/Avatar'
 
 interface InputMessageProps {
     onCallback: (value: string) => void
@@ -38,7 +38,7 @@ export default class InputMessage extends PureComponent<InputMessageProps, Input
 
         return (
             <View style={styles.mainContainer}>
-                <Image source={require('../../assets/images/ava/ava.png')} style={styles.ava} />
+                <Avatar id={0} size={44} />
                 <ScrollView
                     keyboardShouldPersistTaps={'always'}
                     keyboardDismissMode={'on-drag'}
@@ -88,10 +88,6 @@ const styles = EStyleSheet.create({
         flexDirection: 'row',
         alignItems: 'flex-end',
         width: '100%',
-    },
-    ava: {
-        width: getRemValue(44),
-        height: getRemValue(44),
     },
     inputContainer: {
         flexGrow: 1,

@@ -1,15 +1,18 @@
 import React, { PureComponent } from 'react'
-import { View, StyleSheet, BackHandler, ScrollView } from 'react-native'
+import { View, BackHandler, FlatList } from 'react-native'
+import EStyleSheet from 'react-native-extended-stylesheet'
 import { connect } from 'react-redux'
 import { Dispatch, bindActionCreators } from 'redux'
+import { ComponentEvent } from 'react-native-navigation'
 import shortid from 'shortid'
 
 import { colors } from '../../constants/colors'
 import InputMessage from '../../components/InputMessage/InputMessage'
-import { IReduxState, IChatState } from '../../types/reducer'
 import { getMessages, sendMessage, removeMessage } from '../../redux/actions/chatActions'
-import { ComponentEvent } from 'react-native-navigation'
 import { ISendMessagePayload, IRemoveMessagePayload } from '../../types/actions'
+import { IReduxState, IChatState, IMessage } from '../../types/reducer'
+import { getRemValue } from '../../helpers/stylesHelper'
+import Message from '../../components/Message/Message'
 
 interface IDispatchProps {
     getMessages: () => void
@@ -40,12 +43,25 @@ export default class ChatScreen extends PureComponent<IChatScreenProps> {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick)
     }
 
+    public renderItem = ({ item }: { item: IMessage }) => (
+        <Message id={item.id} text={item.text} onCallback={this.handleRemoveMessage} />
+    )
+
+    public renderItemSeparator = () => <View style={styles.separator} />
+
     public render() {
-        console.log(this.props)
+        const { messages } = this.props
 
         return (
             <View style={styles.mainContainer}>
-                <ScrollView contentContainerStyle={styles.messagesContainer} />
+                <FlatList
+                    data={messages}
+                    contentContainerStyle={styles.messagesContainer}
+                    extraData={messages.length}
+                    renderItem={this.renderItem}
+                    ItemSeparatorComponent={this.renderItemSeparator}
+                    keyExtractor={this.keyExtractor}
+                />
                 <InputMessage onCallback={this.handleSendMessage} />
             </View>
         )
@@ -68,16 +84,23 @@ export default class ChatScreen extends PureComponent<IChatScreenProps> {
 
         this.props.sendMessage(payload)
     }
+
+    private handleRemoveMessage = (id: string) => this.props.removeMessage({ id })
+
+    private keyExtractor = ({ id }: IMessage) => id
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     mainContainer: {
         flexGrow: 1,
         backgroundColor: colors.galleryapprox,
-        paddingHorizontal: 16,
-        paddingVertical: 17,
+        paddingHorizontal: getRemValue(16),
+        paddingVertical: getRemValue(17),
     },
     messagesContainer: {
         flexGrow: 1,
+    },
+    separator: {
+        height: getRemValue(20),
     },
 })
