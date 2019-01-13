@@ -8,8 +8,7 @@ export interface IChatState {
 }
 
 export interface IMessage {
-    id: number
-    author: string
+    id: string
     text: string
     date: Date
 }
